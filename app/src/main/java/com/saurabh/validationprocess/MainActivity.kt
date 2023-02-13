@@ -6,10 +6,10 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.saurabh.gupta.material.view.validation.TYPE
-import com.saurabh.gupta.material.view.validation.Validation.checkErrorNull
 import com.saurabh.gupta.material.view.validation.Validation.onItemClickAutoCompleteTextView
 import com.saurabh.gupta.material.view.validation.Validation.validateAutoCompleteTextView
 import com.saurabh.gupta.material.view.validation.Validation.validateInputEditText
+import com.saurabh.gupta.material.view.validation.Validation.validateRegisteredField
 import com.saurabh.validationprocess.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,17 +32,22 @@ class MainActivity : AppCompatActivity() {
             tilLastName.validateInputEditText("Last name is required", TYPE.NON_EMPTY_STRING)
             tilEmail.validateInputEditText("Valid email is required", TYPE.EMAIL)
             tilMobileNumber.validateInputEditText("Valid mobile is required", TYPE.MOBILE_NUMBER)
+            tilEmailOrMobileNumber.validateInputEditText(
+                "Valid email or mobile is required",
+                TYPE.EMAIL_OR_MOBILE
+            )
             tilCountry.validateAutoCompleteTextView("Please select country", TYPE.NON_EMPTY_STRING)
             /** For Dropdown/Spinner add onItemClickAutoCompleteTextView in itemClickListener section
              * tilCountry.onItemClickAutoCompleteTextView("Please select country", TYPE.NON_EMPTY_STRING)
              */
 
             btnSave.setOnClickListener {
-                if (checkErrorNull(
+                if (validateRegisteredField(
                         tilEmail,
                         tilFirstName,
                         tilLastName,
                         tilMobileNumber,
+                        tilEmailOrMobileNumber,
                         tilCountry
                     )
                 ) {

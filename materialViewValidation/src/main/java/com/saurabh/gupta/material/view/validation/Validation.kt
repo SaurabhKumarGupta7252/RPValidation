@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import com.saurabh.gupta.material.view.validation.ValidateInput.checkDataWithValidType
 import com.saurabh.gupta.material.view.validation.ValidateInput.checkEmail
+import com.saurabh.gupta.material.view.validation.ValidateInput.checkEmailOrMobileNumber
 import com.saurabh.gupta.material.view.validation.ValidateInput.checkMobileNumber
 import com.saurabh.gupta.material.view.validation.ValidateInput.checkOnlyNumber
 import com.saurabh.gupta.material.view.validation.ValidateInput.checkString
@@ -173,10 +174,15 @@ object Validation {
                     if (!checkMobileNumber(textInputLayout)) errorMessage else null
                 textInputLayout.isErrorEnabled = !checkMobileNumber(textInputLayout)
             }
+            TYPE.EMAIL_OR_MOBILE -> {
+                textInputLayout.error =
+                    if (!checkEmailOrMobileNumber(textInputLayout)) errorMessage else null
+                textInputLayout.isErrorEnabled = !checkEmailOrMobileNumber(textInputLayout)
+            }
         }
     }
 
-    fun checkErrorNull(vararg textInputLayout: TextInputLayout): Boolean {
+    fun validateRegisteredField(vararg textInputLayout: TextInputLayout): Boolean {
         var errorCount = 0
         for (textInputLayout in textInputLayout) {
             textInputLayout.error =
