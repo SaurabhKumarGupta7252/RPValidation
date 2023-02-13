@@ -14,10 +14,12 @@ import com.saurabh.gupta.material.view.validation.ValidateInput.checkString
 
 object Validation {
 
+    private var state: Boolean = false
+
     fun TextInputLayout.validateInputEditText(
         errorMessage: String,
         type: TYPE? = null,
-        isValidOnFocusChange: Boolean? = true
+        isValidOnFocusChange: Boolean? = false
     ) {
         initForFocusChange(
             textInputLayout = this,
@@ -42,7 +44,7 @@ object Validation {
     fun TextInputLayout.validateAutoCompleteTextView(
         errorMessage: String,
         type: TYPE? = null,
-        isValidOnFocusChange: Boolean? = true
+        isValidOnFocusChange: Boolean? = false
     ) {
         initForFocusChange(
             textInputLayout = this,
@@ -55,8 +57,8 @@ object Validation {
     fun TextInputLayout.onItemClickAutoCompleteTextView(
         errorMessage: String = "",
         type: TYPE? = null,
-        isValidOnFocusChange: Boolean? = true,
-        isValidOnKeyChange: Boolean? = true
+        isValidOnFocusChange: Boolean? = false,
+        isValidOnKeyChange: Boolean? = false
     ) {
         initForFocusChange(
             textInputLayout = this,
@@ -85,8 +87,8 @@ object Validation {
         textInputLayout: TextInputLayout,
         errorMessage_: String,
         type_: TYPE?,
-        isValidOnFocusChange: Boolean? = true,
-        isValidOnKeyChange: Boolean? = true
+        isValidOnFocusChange: Boolean? = false,
+        isValidOnKeyChange: Boolean? = false
     ) {
         val type = type_ ?: TYPE.NON_EMPTY_STRING
         val errorMessage =
@@ -94,17 +96,16 @@ object Validation {
         textInputLayout.errorMessage(errorMessage)
         textInputLayout.inputDataType(type)
         if (textInputLayout.editText is AppCompatAutoCompleteTextView) {
-            if (isValidOnKeyChange == true) setErrorAndRemove(type, textInputLayout, errorMessage)
+            if (state || isValidOnKeyChange == true) setErrorAndRemove(type, textInputLayout, errorMessage)
         } else {
-            if (isValidOnFocusChange == true) {
                 textInputLayout.editText?.onFocusChangeListener =
                     View.OnFocusChangeListener { _, hasFocus ->
                         if (!hasFocus) {
-                            setErrorAndRemove(type, textInputLayout, errorMessage)
+                            if (state || isValidOnFocusChange == true) {
+                                setErrorAndRemove(type, textInputLayout, errorMessage)
+                            }
                         }
-                    }
             }
-            if (isValidOnKeyChange == true) {
                 textInputLayout.editText?.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(
                         s: CharSequence?,
@@ -121,14 +122,15 @@ object Validation {
                         before: Int,
                         count: Int
                     ) {
-                        setErrorAndRemove(type, textInputLayout, errorMessage)
+                        if (state || isValidOnKeyChange == true) {
+                            setErrorAndRemove(type, textInputLayout, errorMessage)
+                        }
                     }
 
                     override fun afterTextChanged(s: Editable?) {
 
                     }
                 })
-            }
         }
     }
 
@@ -146,6 +148,14 @@ object Validation {
 
     fun TextInputLayout.inputDataType(type: TYPE) {
         this.setTag(R.id.inputDataType, type.name)
+    }
+
+    fun TextInputLayout.errorEnabled(): Boolean {
+        return this.getTag(R.id.errorEnabled) == true
+    }
+
+    fun TextInputLayout.errorEnabled(errorEnabled: Boolean) {
+        this.setTag(R.id.errorEnabled, errorEnabled)
     }
 
     internal fun setErrorAndRemove(
@@ -184,10 +194,12 @@ object Validation {
 
     fun validateRegisteredField(vararg textInputLayout: TextInputLayout): Boolean {
         var errorCount = 0
+        state = true
         for (textInputLayout in textInputLayout) {
             textInputLayout.error =
                 if (!checkDataWithValidType(textInputLayout)) textInputLayout.errorMessage()
                 else null
+            textInputLayout.isErrorEnabled = textInputLayout.error != null
             if (textInputLayout.error != null) errorCount++
         }
         return errorCount == 0

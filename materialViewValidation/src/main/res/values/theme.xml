@@ -2,4 +2,5 @@
 <resources>
     <item name="errorMessage" type="id" />
     <item name="inputDataType" type="id" />
+    <item name="errorEnabled" type="id" />
 </resources>

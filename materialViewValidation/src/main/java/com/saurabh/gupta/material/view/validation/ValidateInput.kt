@@ -3,6 +3,7 @@ package com.saurabh.gupta.material.view.validation
 import android.util.Patterns
 import androidx.core.text.isDigitsOnly
 import com.google.android.material.textfield.TextInputLayout
+import com.saurabh.gupta.material.view.validation.Validation.errorEnabled
 import com.saurabh.gupta.material.view.validation.Validation.inputDataType
 
 object ValidateInput {
@@ -38,6 +39,5 @@ object ValidateInput {
             TYPE.MOBILE_NUMBER -> checkMobileNumber(textInputLayout)
             TYPE.EMAIL_OR_MOBILE -> checkEmailOrMobileNumber(textInputLayout)
         }
-
     }
 }
