@@ -16,6 +16,14 @@ object Validation {
 
     private var state: Boolean = false
 
+    fun initiateValidation() {
+        state = false
+    }
+
+    fun resetValidation() {
+        state = false
+    }
+
     fun TextInputLayout.validateInputEditText(
         errorMessage: String,
         type: TYPE? = null,
