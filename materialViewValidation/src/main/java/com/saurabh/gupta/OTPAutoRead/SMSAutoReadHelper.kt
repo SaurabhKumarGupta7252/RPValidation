@@ -1,10 +1,8 @@
-package com.app.resiliencyprogram.helper
+package com.saurabh.gupta.OTPAutoRead
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity

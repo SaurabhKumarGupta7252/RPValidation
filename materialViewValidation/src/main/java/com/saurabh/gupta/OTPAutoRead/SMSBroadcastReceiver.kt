@@ -1,4 +1,4 @@
-package com.app.resiliencyprogram.helper
+package com.saurabh.gupta.OTPAutoRead
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,7 +10,7 @@ import com.google.android.gms.common.api.Status
 
 class SMSBroadcastReceiver : BroadcastReceiver() {
 
-    var smsReceiverListener :SMSBroadcastReceiver.SMSBroadcastReceiverListener? = null
+    var smsReceiverListener: SMSBroadcastReceiverListener? = null
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (SmsRetriever.SMS_RETRIEVED_ACTION == intent?.action) {
