@@ -149,7 +149,7 @@ public class NumberPicker extends LinearLayout {
     /**
      * The default max height of this widget.
      */
-    private static final int DEFAULT_MAX_HEIGHT = 250;
+    private static final int DEFAULT_MAX_HEIGHT = 300;
 
     /**
      * The default min width of this widget.
