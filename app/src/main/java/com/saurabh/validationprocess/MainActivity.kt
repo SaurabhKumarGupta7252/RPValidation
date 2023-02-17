@@ -1,20 +1,28 @@
 package com.saurabh.validationprocess
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.saurabh.gupta.OTPAutoRead.SMSAutoReadHelper
 import com.saurabh.gupta.material.view.validation.TYPE
 import com.saurabh.gupta.material.view.validation.Validation.onItemClickAutoCompleteTextView
 import com.saurabh.gupta.material.view.validation.Validation.validateAutoCompleteTextView
 import com.saurabh.gupta.material.view.validation.Validation.validateInputEditText
-import com.saurabh.gupta.material.view.validation.Validation.validateRegisteredField
 import com.saurabh.validationprocess.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private var launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            smsAutoReadHelper.onActivityResult(result)
+        }
+    private lateinit var smsAutoReadHelper: SMSAutoReadHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,7 +50,7 @@ class MainActivity : AppCompatActivity() {
              */
 
             btnSave.setOnClickListener {
-                if (validateRegisteredField(
+                /*if (validateRegisteredField(
                         tilEmail,
                         tilFirstName,
                         tilLastName,
@@ -52,10 +60,34 @@ class MainActivity : AppCompatActivity() {
                     )
                 ) {
                     Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
-                }
+                }*/
+                startActivity(Intent(this@MainActivity, MainActivity2::class.java))
             }
         }
+
+        /*binding.mobilePin.onPinFilledListener(object : PinViewOnPinFilled.OnPinFill {
+            override fun onPinFilled(text: String?) {
+                //binding.btnNext.performClick()
+            }
+        })*/
     }
+
+    override fun onStart() {
+        super.onStart()
+        smsAutoReadHelper = SMSAutoReadHelper(this@MainActivity)
+        smsAutoReadHelper.registerBroadcastReceiver(launcher)
+        smsAutoReadHelper.setAuthCodeListener(object : SMSAutoReadHelper.AuthCodeListener {
+            override fun onRead(authCode: String) {
+                //binding.mobilePin.setText(authCode)
+            }
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        smsAutoReadHelper.unregisterReceiver()
+    }
+
 
     private fun fillCountryList() {
         binding.country.setAdapter(

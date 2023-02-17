@@ -1,0 +1,152 @@
+package com.saurabh.validationprocess
+
+import android.app.Activity
+import android.os.Bundle
+import com.saurabh.validationprocess.databinding.ActivityMain2Binding
+
+class MainActivity2 : Activity() {
+
+    private val TAG = "NUMBER_PICKER"
+    private lateinit var binding: ActivityMain2Binding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMain2Binding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        val numberPicker = binding.numberPicker
+
+/*        // Set divider color
+
+        // Set divider color
+        numberPicker.dividerColor = ContextCompat.getColor(this, R.color.colorPrimary)
+        numberPicker.setDividerColorResource(R.color.colorPrimary)
+
+        // Set formatter
+
+        // Set formatter
+        numberPicker.setFormatter(getString(R.string.number_picker_formatter))
+        numberPicker.setFormatter(R.string.number_picker_formatter)
+
+        // Set selected text color
+
+        // Set selected text color
+        numberPicker.selectedTextColor = ContextCompat.getColor(this, R.color.colorPrimary)
+        numberPicker.setSelectedTextColorResource(R.color.colorPrimary)
+
+        // Set selected text size
+
+        // Set selected text size
+        numberPicker.selectedTextSize = resources.getDimension(R.dimen.selected_text_size)
+        numberPicker.setSelectedTextSize(R.dimen.selected_text_size)
+
+        // Set selected typeface
+
+        // Set selected typeface
+        numberPicker.setSelectedTypeface(
+            Typeface.create(
+                getString(R.string.roboto_light),
+                Typeface.NORMAL
+            )
+        )
+        numberPicker.setSelectedTypeface(getString(R.string.roboto_light), Typeface.NORMAL)
+        numberPicker.setSelectedTypeface(getString(R.string.roboto_light))
+        numberPicker.setSelectedTypeface(R.string.roboto_light, Typeface.NORMAL)
+        numberPicker.setSelectedTypeface(R.string.roboto_light)
+
+        // Set text color
+
+        // Set text color
+        numberPicker.textColor = ContextCompat.getColor(this, R.color.dark_grey)
+        numberPicker.setTextColorResource(R.color.dark_grey)
+
+        // Set text size
+
+        // Set text size
+        numberPicker.textSize = resources.getDimension(R.dimen.text_size)
+        numberPicker.setTextSize(R.dimen.text_size)
+
+        // Set typeface
+
+        // Set typeface
+        numberPicker.typeface = Typeface.create(getString(R.string.roboto_light), Typeface.NORMAL)
+        numberPicker.setTypeface(getString(R.string.roboto_light), Typeface.NORMAL)
+        numberPicker.setTypeface(getString(R.string.roboto_light))
+        numberPicker.setTypeface(R.string.roboto_light, Typeface.NORMAL)
+        numberPicker.setTypeface(R.string.roboto_light)
+
+        // Set value
+
+        // Set value
+        numberPicker.maxValue = 59
+        numberPicker.minValue = 0
+        numberPicker.value = 3
+
+        // Set string values
+//        String[] data = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+//        numberPicker.setMinValue(1);
+//        numberPicker.setMaxValue(data.length);
+//        numberPicker.setDisplayedValues(data);
+
+        // Set fading edge enabled
+
+        // Set string values
+//        String[] data = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+//        numberPicker.setMinValue(1);
+//        numberPicker.setMaxValue(data.length);
+//        numberPicker.setDisplayedValues(data);
+
+        // Set fading edge enabled
+        numberPicker.isFadingEdgeEnabled = true
+
+        // Set scroller enabled
+
+        // Set scroller enabled
+        numberPicker.isScrollerEnabled = true
+
+        // Set wrap selector wheel
+
+        // Set wrap selector wheel
+        numberPicker.wrapSelectorWheel = true
+
+        // Set accessibility description enabled
+
+        // Set accessibility description enabled
+        numberPicker.isAccessibilityDescriptionEnabled = true
+
+        // OnClickListener
+
+        // OnClickListener
+        numberPicker.setOnClickListener(View.OnClickListener {
+            Log.d(
+                TAG,
+                "Click on current value"
+            )
+        })
+
+        // OnValueChangeListener
+
+        // OnValueChangeListener
+        numberPicker.setOnValueChangedListener { _, oldVal, newVal ->
+            Log.d(
+                TAG,
+                String.format(Locale.US, "oldVal: %d, newVal: %d", oldVal, newVal)
+            )
+        }
+
+        // OnScrollListener
+
+        // OnScrollListener
+        numberPicker.setOnScrollListener { picker, scrollState ->
+            if (scrollState == SCROLL_STATE_IDLE) {
+                Log.d(
+                    TAG,
+                    java.lang.String.format(Locale.US, "newVal: %d", picker.getValue())
+                )
+            }
+        }*/
+    }
+}

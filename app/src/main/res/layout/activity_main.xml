@@ -226,4 +226,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.chaos.view.PinView
+            android:id="@+id/mobilePin"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="smsOTPCode"
+            android:cursorVisible="true"
+            android:importantForAutofill="yes"
+            android:inputType="number"
+            android:itemBackground="@drawable/bg_edittext_rectangle"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
+            app:cursorColor="@color/new_blue_theme_color"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="@dimen/_40sdp"
+            app:itemSpacing="@dimen/_4sdp"
+            app:itemWidth="@dimen/_37sdp"
+            app:viewType="none"
+            tools:text="@string/txt_555555" />
+
+    </LinearLayout>-->
+
 </androidx.appcompat.widget.LinearLayoutCompat>
