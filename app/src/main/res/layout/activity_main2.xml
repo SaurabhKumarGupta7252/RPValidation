@@ -13,7 +13,39 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity2">
 
-    <com.saurabh.gupta.numberpicker.NumberPicker
+    <com.saurabh.gupta.progressbar.ProgressBar
+        android:id="@+id/progressBar_multi_color"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:padding="1dp"
+        app:sw_progressBackground="#ccc"
+        app:sw_radius="80dp" />
+
+    <com.saurabh.gupta.rangeBar.RangeBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mrb_connectingLineColor="#C1E2DE"
+        app:mrb_rangeBar="false"
+        app:mrb_rangeBar_rounded="true"
+        app:mrb_rightThumbColor="@color/white"
+        app:mrb_temporaryPins="true"
+        app:mrb_thumbBoundaryColor="@color/black"
+        app:mrb_thumbBoundarySize="1dp"
+        app:mrb_thumbSize="16dp"
+        app:mrb_minThumbDistance="-1"
+        app:mrb_tickDefaultColor="#C1E2DE"
+        app:mrb_tickEnd="4"
+        app:mrb_tickHeight="8dp"
+        app:mrb_pinColor="#00000000"
+        app:mrb_pinTextColor="#00000000"
+        app:mrb_tickInterval="1"
+        app:mrb_thumbCenterPointSize="7dp"
+        app:mrb_thumbCenterPointColor="@color/black"
+        app:mrb_tickLabelSelectedColor="#0f0f0f"
+        app:mrb_tickLabelSize="4sp"
+        app:mrb_tickStart="1" />
+
+    <!--<com.saurabh.gupta.numberpicker.NumberPicker
         android:id="@+id/number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +81,6 @@
         app:np_textSize="@dimen/text_size"
         app:np_typeface="@string/roboto_light"
         app:np_width="180dp"
-        app:np_wrapSelectorWheel="true" />
+        app:np_wrapSelectorWheel="true" />-->
 
 </LinearLayout>

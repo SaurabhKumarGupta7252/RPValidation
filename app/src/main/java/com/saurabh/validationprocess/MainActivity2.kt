@@ -1,7 +1,10 @@
 package com.saurabh.validationprocess
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import com.saurabh.gupta.progressbar.ProgressBar
 import com.saurabh.validationprocess.databinding.ActivityMain2Binding
 
 class MainActivity2 : Activity() {
@@ -17,9 +20,27 @@ class MainActivity2 : Activity() {
 
         setContentView(binding.root)
 
-        val numberPicker = binding.numberPicker
+        val colorMultiProgressBar = findViewById<View>(R.id.progressBar_multi_color) as ProgressBar
+        colorMultiProgressBar.setProgressValues(
+            25f,
+            50f,
+            100f,
+            75f
+        )
 
-/*        // Set divider color
+        colorMultiProgressBar.setProgressColors(
+            Color.parseColor("#039BE5"),
+            Color.parseColor("#8BC34A"),
+            Color.parseColor("#FBC02D"),
+            Color.parseColor("#f44336")
+        )
+
+        colorMultiProgressBar.setMaxValue(100f)
+        colorMultiProgressBar.withAnimation(1000)
+
+        /*val numberPicker = binding.numberPicker
+
+        // Set divider color
 
         // Set divider color
         numberPicker.dividerColor = ContextCompat.getColor(this, R.color.colorPrimary)
