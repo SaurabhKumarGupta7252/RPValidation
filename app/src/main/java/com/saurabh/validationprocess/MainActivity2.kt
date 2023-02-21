@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.saurabh.gupta.progressbar.ProgressBar
 import com.saurabh.validationprocess.databinding.ActivityMain2Binding
+import kotlin.math.max
 
 class MainActivity2 : Activity() {
 
