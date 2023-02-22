@@ -2,8 +2,10 @@ package com.saurabh.validationprocess
 
 import android.app.Activity
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.saurabh.gupta.progressbar.ProgressBar
 import com.saurabh.validationprocess.databinding.ActivityMain2Binding
 import kotlin.math.max
@@ -40,7 +42,8 @@ class MainActivity2 : Activity() {
         colorMultiProgressBar.withAnimation(1000)
 
         /*val numberPicker = binding.numberPicker
-
+        numberPicker.setFontResource(R.font.monsterrat_medium)
+        numberPicker.setSelectedFontResource(R.font.montserrat_bold)
         // Set divider color
 
         // Set divider color

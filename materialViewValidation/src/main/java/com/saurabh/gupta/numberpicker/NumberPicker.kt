@@ -23,6 +23,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.saurabh.gupta.material.view.validation.R
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
@@ -2557,6 +2558,12 @@ class NumberPicker @JvmOverloads constructor(
         }
     }
 
+    fun setSelectedFontResource(@FontRes font: Int) {
+        mSelectedTypeface = if (Build.VERSION.SDK_INT < 26) {
+            ResourcesCompat.getFont(context,font )
+        } else resources.getFont(font)
+    }
+
     fun setSelectedTypeface(string: String?, style: Int) {
         if (TextUtils.isEmpty(string)) {
             return
@@ -2589,6 +2596,12 @@ class NumberPicker @JvmOverloads constructor(
             return
         }
         typeface = Typeface.create(string, style)
+    }
+
+    fun setFontResource(@FontRes font: Int) {
+        typeface = if (Build.VERSION.SDK_INT < 26) {
+            ResourcesCompat.getFont(context,font )
+        } else resources.getFont(font)
     }
 
     fun setTypeface(string: String?) {
