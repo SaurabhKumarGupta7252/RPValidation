@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.saurabh.validationprocess'
+    namespace 'com.anndroid.validationprocess'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.saurabh.validationprocess"
+        applicationId "com.android.validationprocess"
         minSdk 21
         targetSdk 33
         versionCode 1
