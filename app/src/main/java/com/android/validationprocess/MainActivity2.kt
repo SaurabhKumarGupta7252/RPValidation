@@ -1,14 +1,11 @@
-package com.saurabh.validationprocess
+package com.android.validationprocess
 
 import android.app.Activity
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
-import com.saurabh.gupta.progressbar.ProgressBar
-import com.saurabh.validationprocess.databinding.ActivityMain2Binding
-import kotlin.math.max
+import com.android.app.progressbar.ProgressBar
+import com.android.validationprocess.databinding.ActivityMain2Binding
 
 class MainActivity2 : Activity() {
 

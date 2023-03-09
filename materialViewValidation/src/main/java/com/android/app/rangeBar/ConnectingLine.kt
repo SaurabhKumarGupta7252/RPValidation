@@ -1,4 +1,4 @@
-package com.saurabh.gupta.rangeBar
+package com.android.app.rangeBar
 
 import android.graphics.Canvas
 import android.graphics.LinearGradient

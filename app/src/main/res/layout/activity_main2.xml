@@ -13,7 +13,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity2">
 
-    <com.saurabh.gupta.progressbar.ProgressBar
+    <com.android.app.progressbar.ProgressBar
         android:id="@+id/progressBar_multi_color"
         android:layout_width="match_parent"
         android:layout_height="15dp"
@@ -21,7 +21,7 @@
         app:sw_progressBackground="#ccc"
         app:sw_radius="80dp" />
 
-    <com.saurabh.gupta.rangeBar.RangeBar
+    <com.android.app.rangeBar.RangeBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mrb_connectingLineColor="#C1E2DE"

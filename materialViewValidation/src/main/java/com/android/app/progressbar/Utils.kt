@@ -1,4 +1,4 @@
-package com.saurabh.gupta.progressbar
+package com.android.app.progressbar
 
 import android.content.res.Resources
 import android.graphics.Color

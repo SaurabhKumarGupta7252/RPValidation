@@ -1,4 +1,4 @@
-package com.saurabh.gupta.rangeBar
+package com.android.app.rangeBar
 
 import android.content.Context
 import android.content.res.Resources
@@ -10,7 +10,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.saurabh.gupta.material.view.validation.R
+import com.android.app.material.view.validation.R
 
 /**
  * Created by Saurabh Gupta on 21/02/23.

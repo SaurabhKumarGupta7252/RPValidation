@@ -1,10 +1,9 @@
-package com.saurabh.gupta.material.view.validation
+package com.android.app.material.view.validation
 
 import android.util.Patterns
 import androidx.core.text.isDigitsOnly
 import com.google.android.material.textfield.TextInputLayout
-import com.saurabh.gupta.material.view.validation.Validation.errorEnabled
-import com.saurabh.gupta.material.view.validation.Validation.inputDataType
+import com.android.app.material.view.validation.Validation.inputDataType
 
 object ValidateInput {
 

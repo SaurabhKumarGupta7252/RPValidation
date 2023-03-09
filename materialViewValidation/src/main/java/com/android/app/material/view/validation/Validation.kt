@@ -1,16 +1,16 @@
-package com.saurabh.gupta.material.view.validation
+package com.android.app.material.view.validation
 
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkDataWithValidType
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkEmail
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkEmailOrMobileNumber
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkMobileNumber
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkOnlyNumber
-import com.saurabh.gupta.material.view.validation.ValidateInput.checkString
+import com.android.app.material.view.validation.ValidateInput.checkDataWithValidType
+import com.android.app.material.view.validation.ValidateInput.checkEmail
+import com.android.app.material.view.validation.ValidateInput.checkEmailOrMobileNumber
+import com.android.app.material.view.validation.ValidateInput.checkMobileNumber
+import com.android.app.material.view.validation.ValidateInput.checkOnlyNumber
+import com.android.app.material.view.validation.ValidateInput.checkString
 
 object Validation {
 

@@ -1,4 +1,4 @@
-package com.saurabh.gupta.rangeBar
+package com.android.app.rangeBar
 
 import android.content.Context
 import android.content.res.Resources

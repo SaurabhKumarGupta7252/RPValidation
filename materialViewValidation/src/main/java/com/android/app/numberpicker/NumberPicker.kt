@@ -1,4 +1,4 @@
-package com.saurabh.gupta.numberpicker
+package com.android.app.numberpicker
 
 import android.content.Context
 import android.content.res.Configuration
@@ -24,7 +24,7 @@ import android.widget.LinearLayout
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.saurabh.gupta.material.view.validation.R
+import com.android.app.material.view.validation.R
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import java.text.DecimalFormatSymbols
