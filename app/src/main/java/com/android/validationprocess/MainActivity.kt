@@ -12,7 +12,7 @@ import com.android.app.material.view.validation.TYPE
 import com.android.app.material.view.validation.Validation.onItemClickAutoCompleteTextView
 import com.android.app.material.view.validation.Validation.validateAutoCompleteTextView
 import com.android.app.material.view.validation.Validation.validateInputEditText
-import com.android.validationprocess.databinding.ActivityMainBinding
+import com.anndroid.validationprocess.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

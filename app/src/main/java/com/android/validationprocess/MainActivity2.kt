@@ -5,7 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.android.app.progressbar.ProgressBar
-import com.android.validationprocess.databinding.ActivityMain2Binding
+import com.anndroid.validationprocess.R
+import com.anndroid.validationprocess.databinding.ActivityMain2Binding
 
 class MainActivity2 : Activity() {
 

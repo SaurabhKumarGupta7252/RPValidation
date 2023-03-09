@@ -45,7 +45,7 @@
         app:mrb_tickLabelSize="4sp"
         app:mrb_tickStart="1" />
 
-    <!--<com.saurabh.gupta.numberpicker.NumberPicker
+    <!--<com.android.app.numberpicker.NumberPicker
         android:id="@+id/number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         app:np_selectedTypeface="@string/roboto_medium"
         app:np_wrapSelectorWheel="true" />
 
-    <com.saurabh.gupta.numberpicker.NumberPicker
+    <com.android.app.numberpicker.NumberPicker
         android:id="@+id/horizontal_number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
