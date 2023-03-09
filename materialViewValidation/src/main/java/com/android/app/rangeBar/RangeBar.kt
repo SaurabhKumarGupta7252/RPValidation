@@ -1,4 +1,4 @@
-package com.saurabh.gupta.rangeBar
+package com.android.app.rangeBar
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -12,8 +12,8 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import com.saurabh.gupta.material.view.validation.R
-import com.saurabh.gupta.rangeBar.RangeBar.OnRangeBarChangeListener
+import com.android.app.material.view.validation.R
+import com.android.app.rangeBar.RangeBar.OnRangeBarChangeListener
 
 /**
  * Created by Saurabh Gupta on 21/02/23.

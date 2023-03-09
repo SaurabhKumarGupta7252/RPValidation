@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.saurabh.gupta.numberpicker
+package com.android.app.numberpicker
 
 import android.content.Context
 import android.hardware.SensorManager

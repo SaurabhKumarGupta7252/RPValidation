@@ -1,4 +1,4 @@
-package com.saurabh.validationprocess
+package com.android.validationprocess
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.saurabh.gupta.OTPAutoRead.SMSAutoReadHelper
-import com.saurabh.gupta.material.view.validation.TYPE
-import com.saurabh.gupta.material.view.validation.Validation.onItemClickAutoCompleteTextView
-import com.saurabh.gupta.material.view.validation.Validation.validateAutoCompleteTextView
-import com.saurabh.gupta.material.view.validation.Validation.validateInputEditText
-import com.saurabh.validationprocess.databinding.ActivityMainBinding
+import com.android.app.OTPAutoRead.SMSAutoReadHelper
+import com.android.app.material.view.validation.TYPE
+import com.android.app.material.view.validation.Validation.onItemClickAutoCompleteTextView
+import com.android.app.material.view.validation.Validation.validateAutoCompleteTextView
+import com.android.app.material.view.validation.Validation.validateInputEditText
+import com.android.validationprocess.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.saurabh.gupta.rangeBar
+package com.android.app.rangeBar
 
 /**
  * Created by Saurabh Gupta on 21/02/23.

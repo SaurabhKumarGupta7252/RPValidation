@@ -1,4 +1,4 @@
-package com.saurabh.gupta.OTPAutoRead
+package com.android.app.OTPAutoRead
 
 import android.content.BroadcastReceiver
 import android.content.Context

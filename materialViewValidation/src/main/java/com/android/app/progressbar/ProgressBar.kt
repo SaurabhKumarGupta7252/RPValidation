@@ -1,4 +1,4 @@
-package com.saurabh.gupta.progressbar
+package com.android.app.progressbar
 
 import android.annotation.TargetApi
 import android.content.Context
@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.saurabh.gupta.material.view.validation.R
+import com.android.app.material.view.validation.R
 import java.util.*
 
 /**

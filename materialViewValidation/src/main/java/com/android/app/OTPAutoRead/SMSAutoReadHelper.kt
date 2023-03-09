@@ -1,4 +1,4 @@
-package com.saurabh.gupta.OTPAutoRead
+package com.android.app.OTPAutoRead
 
 import android.app.Activity
 import android.content.Intent
