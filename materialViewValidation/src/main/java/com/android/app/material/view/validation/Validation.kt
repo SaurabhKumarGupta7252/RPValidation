@@ -10,6 +10,7 @@ import com.android.app.material.view.validation.ValidateInput.checkEmail
 import com.android.app.material.view.validation.ValidateInput.checkEmailOrMobileNumber
 import com.android.app.material.view.validation.ValidateInput.checkMobileNumber
 import com.android.app.material.view.validation.ValidateInput.checkOnlyNumber
+import com.android.app.material.view.validation.ValidateInput.checkRegex
 import com.android.app.material.view.validation.ValidateInput.checkString
 
 object Validation {
@@ -27,12 +28,14 @@ object Validation {
     fun TextInputLayout.validateInputEditText(
         errorMessage: String,
         type: TYPE? = null,
-        isValidOnFocusChange: Boolean? = false
+        isValidOnFocusChange: Boolean? = false,
+        regex: String? = ""
     ) {
         initForFocusChange(
             textInputLayout = this,
             errorMessage_ = errorMessage, type_ = type,
-            isValidOnFocusChange = isValidOnFocusChange
+            isValidOnFocusChange = isValidOnFocusChange,
+            regex = regex
         )
     }
 
@@ -52,13 +55,14 @@ object Validation {
     fun TextInputLayout.validateAutoCompleteTextView(
         errorMessage: String,
         type: TYPE? = null,
-        isValidOnFocusChange: Boolean? = false
+        isValidOnFocusChange: Boolean? = false,
+        regex: String? = ""
     ) {
         initForFocusChange(
             textInputLayout = this,
             errorMessage_ = errorMessage, type_ = type,
             isValidOnFocusChange = isValidOnFocusChange,
-            isValidOnKeyChange = false
+            isValidOnKeyChange = false, regex = regex
         )
     }
 
@@ -66,13 +70,15 @@ object Validation {
         errorMessage: String = "",
         type: TYPE? = null,
         isValidOnFocusChange: Boolean? = false,
-        isValidOnKeyChange: Boolean? = false
+        isValidOnKeyChange: Boolean? = false,
+        regex: String? = ""
     ) {
         initForFocusChange(
             textInputLayout = this,
             errorMessage_ = errorMessage, type_ = type,
             isValidOnFocusChange = isValidOnFocusChange,
-            isValidOnKeyChange = isValidOnKeyChange
+            isValidOnKeyChange = isValidOnKeyChange,
+            regex = regex
         )
     }
 
@@ -96,13 +102,15 @@ object Validation {
         errorMessage_: String,
         type_: TYPE?,
         isValidOnFocusChange: Boolean? = false,
-        isValidOnKeyChange: Boolean? = false
+        isValidOnKeyChange: Boolean? = false,
+        regex: String?
     ) {
         val type = type_ ?: TYPE.NON_EMPTY_STRING
         val errorMessage =
             if (errorMessage_.isNullOrEmpty()) textInputLayout.errorMessage() else errorMessage_
         textInputLayout.errorMessage(errorMessage)
         textInputLayout.inputDataType(type)
+        textInputLayout.regex(regex)
         if (textInputLayout.editText is AppCompatAutoCompleteTextView) {
             if (state || isValidOnKeyChange == true) setErrorAndRemove(type, textInputLayout, errorMessage)
         } else {
@@ -158,6 +166,14 @@ object Validation {
         this.setTag(R.id.inputDataType, type.name)
     }
 
+    fun TextInputLayout.regex(): String {
+        return this.getTag(R.id.regex) as String
+    }
+
+    fun TextInputLayout.regex(regex: String?) {
+        this.setTag(R.id.regex, regex)
+    }
+
     fun TextInputLayout.errorEnabled(): Boolean {
         return this.getTag(R.id.errorEnabled) == true
     }
@@ -196,6 +212,11 @@ object Validation {
                 textInputLayout.error =
                     if (!checkEmailOrMobileNumber(textInputLayout)) errorMessage else null
                 textInputLayout.isErrorEnabled = !checkEmailOrMobileNumber(textInputLayout)
+            }
+            TYPE.REGEX -> {
+                textInputLayout.error =
+                    if (!checkRegex(textInputLayout)) errorMessage else null
+                textInputLayout.isErrorEnabled = !checkRegex(textInputLayout)
             }
         }
     }

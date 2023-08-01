@@ -3,4 +3,5 @@
     <item name="errorMessage" type="id" />
     <item name="inputDataType" type="id" />
     <item name="errorEnabled" type="id" />
+    <item name="regex" type="id" format="string" />
 </resources>
