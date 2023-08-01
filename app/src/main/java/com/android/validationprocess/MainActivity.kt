@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
 
-            tilFirstName.validateInputEditText("First name is required", TYPE.NON_EMPTY_STRING)
+            val regex = "^[\\p{L} .'-]+$"
+            tilFirstName.validateInputEditText("First name is required", TYPE.REGEX, regex = regex)
             tilLastName.validateInputEditText("Last name is required", TYPE.NON_EMPTY_STRING)
             tilEmail.validateInputEditText("Valid email is required", TYPE.EMAIL)
             tilMobileNumber.validateInputEditText("Valid mobile is required", TYPE.MOBILE_NUMBER)

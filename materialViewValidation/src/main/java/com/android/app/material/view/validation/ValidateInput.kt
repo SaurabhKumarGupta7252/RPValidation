@@ -4,6 +4,7 @@ import android.util.Patterns
 import androidx.core.text.isDigitsOnly
 import com.google.android.material.textfield.TextInputLayout
 import com.android.app.material.view.validation.Validation.inputDataType
+import com.android.app.material.view.validation.Validation.regex
 
 object ValidateInput {
 
@@ -30,6 +31,10 @@ object ValidateInput {
         return checkEmail(textInputLayout) || checkMobileNumber(textInputLayout)
     }
 
+    fun checkRegex(textInputLayout: TextInputLayout): Boolean {
+        return Regex(textInputLayout.regex()).matches(textInputLayout.editText?.text!!.toString())
+    }
+
     fun checkDataWithValidType(textInputLayout: TextInputLayout): Boolean {
         return when (textInputLayout.inputDataType()) {
             TYPE.NON_EMPTY_STRING -> checkString(textInputLayout)
@@ -37,6 +42,7 @@ object ValidateInput {
             TYPE.NUMBER -> checkOnlyNumber(textInputLayout)
             TYPE.MOBILE_NUMBER -> checkMobileNumber(textInputLayout)
             TYPE.EMAIL_OR_MOBILE -> checkEmailOrMobileNumber(textInputLayout)
+            TYPE.REGEX -> checkRegex(textInputLayout)
         }
     }
 }
