@@ -83,4 +83,31 @@
         app:np_width="180dp"
         app:np_wrapSelectorWheel="true" />-->
 
+    <com.android.app.speedviewlib.SpeedView
+        android:id="@+id/speedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sv_centerCircleColor="#f00"
+        app:sv_centerCircleRadius="15dp"
+        app:sv_cutPadding="20dp"
+        app:sv_endDegree="360"
+        app:sv_indicator="NeedleIndicator"
+        app:sv_indicatorWidth="20dp"
+        app:sv_markHeight="0dp"
+        app:sv_markWidth="0dp"
+        app:sv_sectionStyle="BUTT"
+        app:sv_speedTextColor="#00000000"
+        app:sv_speedTextPosition="CENTER"
+        app:sv_speedometerMode="TOP"
+        app:sv_startDegree="180"
+        app:sv_textColor="#00000000"
+        app:sv_unitTextColor="#00000000"
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+        app:sv_withTremble="false" />
+
 </LinearLayout>
