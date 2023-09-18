@@ -39,9 +39,9 @@ class NeedleIndicator(context: Context) : Indicator<NeedleIndicator>(context) {
         circlePath.reset()
         indicatorPath.moveTo(getCenterX(), speedometer!!.padding.toFloat() + decreaseLength)
         bottomY =
-            (width * sin(Math.toRadians(260.0))).toFloat() + getViewSize() * .5f + speedometer!!.padding.toFloat()
+            (width * sin(Math.toRadians(220.0))).toFloat() + getViewSize() * .5f + speedometer!!.padding.toFloat()
         val xLeft =
-            (width * cos(Math.toRadians(260.0))).toFloat() + getViewSize() * .5f + speedometer!!.padding.toFloat()
+            (width * cos(Math.toRadians(220.0))).toFloat() + getViewSize() * .5f + speedometer!!.padding.toFloat()
         indicatorPath.lineTo(xLeft, bottomY)
         val rectF = RectF(
             getCenterX() - width,
@@ -49,7 +49,7 @@ class NeedleIndicator(context: Context) : Indicator<NeedleIndicator>(context) {
             getCenterX() + width,
             getCenterY() + width
         )
-        indicatorPath.arcTo(rectF, 260f, 20f)
+        indicatorPath.arcTo(rectF, 210f, 120f)
 
         val circleWidth = width * .25f
         circlePath.addCircle(
