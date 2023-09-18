@@ -3,6 +3,8 @@ package com.android.validationprocess
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.android.app.progressbar.ProgressBar
 import com.android.app.speedviewlib.components.Section
@@ -174,15 +176,15 @@ class MainActivity2 : Activity() {
         }*/
 
         binding.speedView.apply {
-            speedPercentTo(30, 1000)
+            Handler(Looper.getMainLooper()).postDelayed(kotlinx.coroutines.Runnable { speedPercentTo(50, 10000) }, 2000)
             clearSections()
             val strokeWidth = 50f
             addSections(
-                Section(0.toFloat(), 20f / 100, Color.LTGRAY, dpTOpx(strokeWidth)),
-                Section(20f / 100, 40f / 100, Color.GRAY, dpTOpx(strokeWidth)),
-                Section(40f / 100, 60f / 100, Color.DKGRAY, dpTOpx(strokeWidth)),
-                Section(60f / 100, 80f / 100, Color.BLACK, dpTOpx(strokeWidth)),
-                Section(80f / 100, 100f / 100, Color.CYAN, dpTOpx(strokeWidth))
+                Section(0.toFloat(), 20f / 100, Color.parseColor("#00a39d"), dpTOpx(strokeWidth)),
+                Section(20f / 100, 40f / 100, Color.parseColor("#38847f"), dpTOpx(strokeWidth)),
+                Section(40f / 100, 60f / 100, Color.parseColor("#706562"), dpTOpx(strokeWidth)),
+                Section(60f / 100, 80f / 100, Color.parseColor("#a84644"), dpTOpx(strokeWidth)),
+                Section(80f / 100, 100f / 100, Color.parseColor("#e02726"), dpTOpx(strokeWidth))
             )
         }
     }
