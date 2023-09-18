@@ -37,7 +37,7 @@ class NeedleIndicator(context: Context) : Indicator<NeedleIndicator>(context) {
     override fun updateIndicator() {
         indicatorPath.reset()
         circlePath.reset()
-        indicatorPath.moveTo(getCenterX(), speedometer!!.padding.toFloat())
+        indicatorPath.moveTo(getCenterX(), speedometer!!.padding.toFloat() + decreaseLength)
         bottomY =
             (width * sin(Math.toRadians(260.0))).toFloat() + getViewSize() * .5f + speedometer!!.padding.toFloat()
         val xLeft =

@@ -160,6 +160,7 @@
     <attr name="sv_speedometerBackColor" format="color"/>
     <attr name="sv_centerCircleColor" format="color" />
     <attr name="sv_centerCircleRadius" format="dimension" />
+    <attr name="sv_indicatorLengthDecrease" format="dimension" />
 
     <attr name="sv_speedBackgroundColor" format="color" />
     <attr name="sv_withEffects" format="boolean" />
@@ -281,6 +282,7 @@
     <declare-styleable name="SpeedView" parent="Speedometer">
         <attr name="sv_centerCircleColor" />
         <attr name="sv_centerCircleRadius" />
+        <attr name="sv_indicatorLengthDecrease" />
         <attr name="sv_sectionStyle" />
     </declare-styleable>
 

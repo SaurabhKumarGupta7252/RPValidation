@@ -75,6 +75,10 @@ open class SpeedView @JvmOverloads constructor(
             a.getColor(R.styleable.SpeedView_sv_centerCircleColor, circlePaint.color)
         centerCircleRadius =
             a.getDimension(R.styleable.SpeedView_sv_centerCircleRadius, centerCircleRadius)
+        indicator.decreaseLength = a.getDimension(
+            R.styleable.SpeedView_sv_indicatorLengthDecrease,
+            indicator.decreaseLength
+        )
         val styleIndex = a.getInt(R.styleable.SpeedView_sv_sectionStyle, -1)
         if (styleIndex != -1)
             sections.forEach { it.style = Style.values()[styleIndex] }
