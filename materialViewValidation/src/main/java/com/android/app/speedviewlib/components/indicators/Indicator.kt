@@ -31,6 +31,19 @@ abstract class Indicator<out I : Indicator<I>>(context: Context) : Observable() 
         }
 
     /**
+     * indicator length in pixel, this value has several meaning
+     * between [Indicator.Indicators], it will be ignored for all except of one
+     * when using [NeedleIndicator].
+     */
+    var decreaseLength: Float = 0f
+        set(indicatorLength) {
+            field = indicatorLength
+            speedometer?.let { updateIndicator() }
+            setChanged()
+            notifyObservers(null)
+        }
+
+    /**
      * change indicator's color,
      * this option will be ignored when using [ImageIndicator].
      */
