@@ -8,11 +8,14 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.android.app.OTPAutoRead.SMSAutoReadHelper
+import com.android.app.html2pdf.Html2Pdf
 import com.android.app.material.view.validation.TYPE
 import com.android.app.material.view.validation.Validation.onItemClickAutoCompleteTextView
 import com.android.app.material.view.validation.Validation.validateAutoCompleteTextView
 import com.android.app.material.view.validation.Validation.validateInputEditText
 import com.anndroid.validationprocess.databinding.ActivityMainBinding
+import java.io.File
+import java.net.URI
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,6 +67,17 @@ class MainActivity : AppCompatActivity() {
                 }*/
                 startActivity(Intent(this@MainActivity, MainActivity2::class.java))
             }
+        }
+
+        //create PDF
+        try {
+            Html2Pdf.Companion.Builder()
+                .context(this)
+                .html("you html text will be there to write in PDF")
+                .file(File(URI("your file uri")))
+                .build()
+        }catch (e:Exception){
+
         }
 
         /*binding.mobilePin.onPinFilledListener(object : PinViewOnPinFilled.OnPinFill {
