@@ -71,11 +71,25 @@ class MainActivity : AppCompatActivity() {
 
         //create PDF
         try {
-            Html2Pdf.Companion.Builder()
+            val converter = Html2Pdf.Companion.Builder()
                 .context(this)
                 .html("you html text will be there to write in PDF")
                 .file(File(URI("your file uri")))
                 .build()
+
+            //can be called with a callback to warn the user, share file...
+            converter.convertToPdf(object : Html2Pdf.OnCompleteConversion {
+                override fun onFailed() {
+
+                }
+
+                override fun onSuccess() {
+
+                }
+            })
+
+            //or without a callback
+            converter.convertToPdf()
         }catch (e:Exception){
 
         }
