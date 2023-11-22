@@ -1,8 +1,10 @@
 package com.android.app.OTPAutoRead
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +43,9 @@ class SMSAutoReadHelper(activity: Activity) {
                 }
             }
         val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
-        activity.registerReceiver(smsBroadcastReceiver, intentFilter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            activity.registerReceiver(smsBroadcastReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        else activity.registerReceiver(smsBroadcastReceiver, intentFilter)
     }
 
     fun unregisterReceiver() {
