@@ -48,6 +48,7 @@ public class TapTarget {
     final CharSequence skipText;
 
     float outerCircleAlpha = 0.96f;
+    float dimAlpha = 0.96f;
     int targetRadius = 44;
 
     Rect bounds;
@@ -275,6 +276,17 @@ public class TapTarget {
             throw new IllegalArgumentException("Given an invalid alpha value: " + alpha);
         }
         this.outerCircleAlpha = alpha;
+        return this;
+    }
+
+    /**
+     * Specify the alpha value [0.0, 1.0] of the dim
+     **/
+    public TapTarget dimAlpha(float alpha) {
+        if (alpha < 0.0f || alpha > 1.0f) {
+            throw new IllegalArgumentException("Given an invalid alpha value: " + alpha);
+        }
+        this.dimAlpha = alpha;
         return this;
     }
 
