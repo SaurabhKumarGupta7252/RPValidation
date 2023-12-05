@@ -1,0 +1,17 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 33
+    }
+    namespace 'com.getkeepsafe.taptargetview'
+}
+
+dependencies {
+    api "androidx.annotation:annotation:1.2.0"
+    api "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.core:core:1.6.0"
+}
