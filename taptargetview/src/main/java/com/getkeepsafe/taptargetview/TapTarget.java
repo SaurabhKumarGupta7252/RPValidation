@@ -69,6 +69,12 @@ public class TapTarget {
     private int descriptionTextColorRes = -1;
     @ColorRes
     private int skipTextColorRes = -1;
+    @ColorRes
+    private int descriptionBackgroundColorRes = -1;
+    @ColorRes
+    private int skipBackgroundColorRes = -1;
+    int skipBackgroundCornerRadius = 0;
+    int descriptionBackgroundCornerRadius = 0;
 
     private Integer outerCircleColor = null;
     private Integer targetCircleColor = null;
@@ -76,6 +82,8 @@ public class TapTarget {
     private Integer titleTextColor = null;
     private Integer descriptionTextColor = null;
     private Integer skipTextColor = null;
+    private Integer descriptionBackgroundColor = null;
+    private Integer skipBackgroundColor = null;
 
     @DimenRes
     private int titleTextDimen = -1;
@@ -360,6 +368,38 @@ public class TapTarget {
     }
 
     /**
+     * Specify the background color resource for the skip
+     **/
+    public TapTarget skipBackgroundColor(@ColorRes int color) {
+        this.skipBackgroundColorRes = color;
+        return this;
+    }
+
+    /**
+     * Specify the background color resource for the description
+     **/
+    public TapTarget descriptionBackgroundColor(@ColorRes int color) {
+        this.descriptionBackgroundColorRes = color;
+        return this;
+    }
+
+    /**
+     * Specify the background radius for the skip
+     **/
+    public TapTarget skipBackgroundCornerRadius(int radius) {
+        this.skipBackgroundCornerRadius = radius;
+        return this;
+    }
+
+    /**
+     * Specify the background radius for the description
+     **/
+    public TapTarget descriptionBackgroundCornerRadius(int radius) {
+        this.descriptionBackgroundCornerRadius = radius;
+        return this;
+    }
+
+    /**
      * Specify the color value for the description text
      **/
     // TODO(Hilal): In v2, this API should be cleaned up / torched
@@ -374,6 +414,24 @@ public class TapTarget {
     // TODO(Hilal): In v2, this API should be cleaned up / torched
     public TapTarget skipTextColorInt(@ColorInt int color) {
         this.skipTextColor = color;
+        return this;
+    }
+
+    /**
+     * Specify the background color value for the skip
+     **/
+    // TODO(Hilal): In v2, this API should be cleaned up / torched
+    public TapTarget skipBackgroundColorInt(@ColorInt int color) {
+        this.skipBackgroundColor = color;
+        return this;
+    }
+
+    /**
+     * Specify the background color value for the description
+     **/
+    // TODO(Hilal): In v2, this API should be cleaned up / torched
+    public TapTarget descriptionBackgroundColorInt(@ColorInt int color) {
+        this.descriptionBackgroundColor = color;
         return this;
     }
 
@@ -637,6 +695,24 @@ public class TapTarget {
     @Nullable
     Integer skipTextColorInt(Context context) {
         return colorResOrInt(context, skipTextColor, skipTextColorRes);
+    }
+
+    @Nullable
+    Integer skipBackgroundColorInt(Context context) {
+        return colorResOrInt(context, skipBackgroundColor, skipBackgroundColorRes);
+    }
+
+    @Nullable
+    Integer descriptionBackgroundColorInt(Context context) {
+        return colorResOrInt(context, descriptionBackgroundColor, descriptionBackgroundColorRes);
+    }
+
+    int descriptionBackgroundCornerRadius() {
+        return descriptionBackgroundCornerRadius;
+    }
+
+    int skipBackgroundCornerRadius() {
+        return skipBackgroundCornerRadius;
     }
 
     int titleTextSizePx(Context context) {

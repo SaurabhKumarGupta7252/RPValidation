@@ -33,6 +33,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -92,7 +93,9 @@ public class TapTargetView extends View {
 
     final TextPaint titlePaint;
     final TextPaint descriptionPaint;
+    final Paint descriptionBackgroundPaint;
     final TextPaint skipPaint;
+    final Paint skipBackgroundPaint;
     final Paint outerCirclePaint;
     final Paint outerCircleShadowPaint;
     final Paint targetCirclePaint;
@@ -137,6 +140,11 @@ public class TapTargetView extends View {
     int[] outerCircleCenter;
     int outerCircleAlpha;
     int dimAlpha;
+    int skipBackgroundAlpha;
+    int descriptionBackgroundAlpha;
+
+    RectF skipBackgroundRectf;
+    RectF descriptionBackgroundRectf;
 
     float targetCirclePulseRadius;
     int targetCirclePulseAlpha;
@@ -434,6 +442,12 @@ public class TapTargetView extends View {
         skipPaint.setAntiAlias(true);
         skipPaint.setAlpha((int) (0.54f * 255.0f));
 
+        skipBackgroundPaint = new Paint();
+        skipBackgroundPaint.setAlpha((int) (skipBackgroundAlpha));
+
+        descriptionBackgroundPaint = new Paint();
+        descriptionBackgroundPaint.setAlpha((int) (descriptionBackgroundAlpha));
+
         descriptionPaint = new TextPaint();
         descriptionPaint.setTextSize(target.descriptionTextSizePx(context));
         descriptionPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL));
@@ -550,10 +564,11 @@ public class TapTargetView extends View {
                 Log.e("TAG", "onClick: " + lastTouchX + " : " + lastTouchY + " : " + skipLayout.getHeight() + " : " + skipLayout.getWidth());
                 */
 
-                boolean top = (getTextBounds().bottom - skipLayout.getHeight() <= lastTouchY);
-                boolean bottom = (getTextBounds().bottom > lastTouchY);
-                boolean left = (getTextBounds().left <= lastTouchX);
-                boolean right = ((getTextBounds().left + skipLayout.getWidth()) > lastTouchX);
+                assert skipLayout != null;
+                boolean left = ((getTextBounds().left - TEXT_SPACING) <= lastTouchX);
+                boolean top = (((getTextBounds().bottom - skipLayout.getHeight()) + TEXT_SPACING * 2) <= lastTouchY);
+                boolean right = ((getTextBounds().left + skipLayout.getWidth() + TEXT_SPACING) > lastTouchX);
+                boolean bottom = ((getTextBounds().bottom + TEXT_SPACING * 2) > lastTouchY);
 
                 if (top && bottom && left && right) {
                     isInteractable = true;
@@ -674,6 +689,20 @@ public class TapTargetView extends View {
             skipPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
         }
 
+        final Integer skipBackgroundColor = target.skipBackgroundColorInt(context);
+        if (skipBackgroundColor != null) {
+            skipBackgroundPaint.setColor(skipBackgroundColor);
+        } else {
+            skipBackgroundPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
+        }
+
+        final Integer descriptionBackgroundColor = target.descriptionBackgroundColorInt(context);
+        if (descriptionBackgroundColor != null) {
+            descriptionBackgroundPaint.setColor(descriptionBackgroundColor);
+        } else {
+            descriptionBackgroundPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
+        }
+
         final Integer descriptionTextColor = target.descriptionTextColorInt(context);
         if (descriptionTextColor != null) {
             descriptionPaint.setColor(descriptionTextColor);
@@ -758,6 +787,30 @@ public class TapTargetView extends View {
 
         saveCount = c.save();
         {
+
+            assert description != null;
+            if (!description.toString().isEmpty()) {
+                assert titleLayout != null;
+                assert descriptionLayout != null;
+                assert skipLayout != null;
+                float top = getTextBounds().top + titleLayout.getHeight();
+                float bottom = getTextBounds().bottom - skipLayout.getHeight() + TEXT_SPACING;
+                float left = getTextBounds().left - TEXT_SPACING;
+                float right = getTextBounds().left + descriptionLayout.getWidth() + TEXT_SPACING;
+                c.drawRoundRect(new RectF(left, top, right, bottom), target.descriptionBackgroundCornerRadius, target.descriptionBackgroundCornerRadius, descriptionBackgroundPaint);
+            }
+
+            if (!skipText.toString().isEmpty()) {
+                assert titleLayout != null;
+                assert descriptionLayout != null;
+                assert skipLayout != null;
+                float left = getTextBounds().left - TEXT_SPACING;
+                float top = (getTextBounds().bottom - skipLayout.getHeight()) + TEXT_SPACING * 2;
+                float right = getTextBounds().left + skipLayout.getWidth() + TEXT_SPACING;
+                float bottom = getTextBounds().bottom + TEXT_SPACING * 2;
+                c.drawRoundRect(new RectF(left, top, right, bottom), target.descriptionBackgroundCornerRadius, target.skipBackgroundCornerRadius, skipBackgroundPaint);
+            }
+
             c.translate(textBounds.left, textBounds.top);
             titlePaint.setAlpha(textAlpha);
             if (titleLayout != null) {
@@ -771,7 +824,7 @@ public class TapTargetView extends View {
             }
 
             if (skipLayout != null && descriptionLayout != null && titleLayout != null) {
-                c.translate(0, /*titleLayout.getHeight() + TEXT_SPACING + */descriptionLayout.getHeight() + TEXT_SPACING);
+                c.translate(0, /*titleLayout.getHeight() + TEXT_SPACING + */descriptionLayout.getHeight() + TEXT_SPACING * 2);
                 skipPaint.setAlpha(skipPaint.getAlpha());
                 skipLayout.draw(c);
             }
