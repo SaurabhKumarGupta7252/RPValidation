@@ -10,6 +10,8 @@ import com.android.app.progressbar.ProgressBar
 import com.android.app.speedviewlib.components.Section
 import com.anndroid.validationprocess.R
 import com.anndroid.validationprocess.databinding.ActivityMain2Binding
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
 
 class MainActivity2 : Activity() {
 
@@ -187,5 +189,44 @@ class MainActivity2 : Activity() {
                 Section(80f / 100, 100f / 100, Color.parseColor("#e02726"), dpTOpx(strokeWidth))
             )
         }
+
+        TapTargetView.showFor(this@MainActivity2,
+            TapTarget.forView(
+                binding.progressBarMultiColor,
+                "",
+                "Desrciption",
+                "skip"
+            ).cancelable(true)
+                .drawShadow(true)
+                .outerCircleColor(R.color.black)
+                .targetCircleColor(R.color.white)
+                .dimColor(R.color.black)
+                .dimAlpha(.5f)
+                .descriptionTextColor(R.color.white)
+                .descriptionTextAlpha(1f)
+                .skipTextColor(R.color.red)
+                .titleTextDimen(R.dimen.text_size)
+                .skipTextDimen(R.dimen.text_size)
+                .tintTarget(false),
+            object : TapTargetView.Listener() {
+                override fun onTargetClick(view: TapTargetView) {
+                    super.onTargetClick(view)
+
+                }
+
+                override fun onSkipClick(view: TapTargetView?) {
+                    super.onSkipClick(view)
+
+                }
+
+                override fun onOuterCircleClick(view: TapTargetView) {
+                    super.onOuterCircleClick(view)
+
+                }
+
+                override fun onTargetDismissed(view: TapTargetView, userInitiated: Boolean) {
+
+                }
+            })
     }
 }

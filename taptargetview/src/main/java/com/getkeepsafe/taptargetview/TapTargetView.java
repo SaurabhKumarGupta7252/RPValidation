@@ -262,7 +262,7 @@ public class TapTargetView extends View {
             final float dimAlpha1 = target.dimAlpha * 255;
             outerCircleRadius = newOuterCircleRadius;
             outerCircleAlpha = (int) Math.min(targetAlpha, (lerpTime * 1.5f * targetAlpha));
-            dimAlpha = (int) Math.min(dimAlpha1, (lerpTime * 1.5f * dimAlpha1));
+            dimAlpha = (int) dimAlpha1;
             outerCirclePath.reset();
             outerCirclePath.addCircle(outerCircleCenter[0], outerCircleCenter[1], outerCircleRadius, Path.Direction.CW);
 
@@ -352,7 +352,6 @@ public class TapTargetView extends View {
                     final float spedUpLerp = Math.min(1.0f, lerpTime * 2.0f);
                     outerCircleRadius = calculatedOuterCircleRadius * (1.0f + (spedUpLerp * 0.2f));
                     outerCircleAlpha = (int) ((1.0f - spedUpLerp) * target.outerCircleAlpha * 255.0f);
-                    dimAlpha = (int) ((1.0f - spedUpLerp) * target.dimAlpha * 255.0f);
                     outerCirclePath.reset();
                     outerCirclePath.addCircle(outerCircleCenter[0], outerCircleCenter[1], outerCircleRadius, Path.Direction.CW);
                     targetCircleRadius = (1.0f - lerpTime) * TARGET_RADIUS;
@@ -656,7 +655,7 @@ public class TapTargetView extends View {
 
         final Integer targetDimColor = target.dimColorInt(context);
         if (targetDimColor != null) {
-            dimColor = UiUtil.setAlpha(targetDimColor, dimAlpha);
+            dimColor = UiUtil.setAlpha(targetDimColor, target.dimAlpha);
         } else {
             dimColor = -1;
         }
