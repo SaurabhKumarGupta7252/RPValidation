@@ -210,8 +210,8 @@ class MainActivity2 : Activity() {
                 .descriptionTextColor(R.color.white)
                 .descriptionTextAlpha(1f)
                 .skipTextColor(R.color.red)
-                .titleTextDimen(R.dimen.text_size)
-                .skipTextDimen(R.dimen.text_size)
+                .titleTextDimen(R.dimen.activity_horizontal_margin)
+                .skipTextDimen(R.dimen.activity_horizontal_margin)
                 .tintTarget(false),
             object : TapTargetView.Listener() {
                 override fun onTargetClick(view: TapTargetView) {

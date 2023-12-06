@@ -442,6 +442,9 @@ public class TapTargetView extends View {
         skipPaint.setAntiAlias(true);
         skipPaint.setAlpha((int) (0.54f * 255.0f));
 
+        skipBackgroundRectf = new RectF();
+        descriptionBackgroundRectf = new RectF();
+
         skipBackgroundPaint = new Paint();
         skipBackgroundPaint.setAlpha((int) (skipBackgroundAlpha));
 
@@ -797,9 +800,11 @@ public class TapTargetView extends View {
                 float bottom = getTextBounds().bottom - skipLayout.getHeight() + TEXT_SPACING;
                 float left = getTextBounds().left - TEXT_SPACING;
                 float right = getTextBounds().left + descriptionLayout.getWidth() + TEXT_SPACING;
-                c.drawRoundRect(new RectF(left, top, right, bottom), target.descriptionBackgroundCornerRadius, target.descriptionBackgroundCornerRadius, descriptionBackgroundPaint);
+                descriptionBackgroundRectf.set(left, top, right, bottom);
+                c.drawRoundRect(descriptionBackgroundRectf, target.descriptionBackgroundCornerRadius, target.descriptionBackgroundCornerRadius, descriptionBackgroundPaint);
             }
 
+            assert skipText != null;
             if (!skipText.toString().isEmpty()) {
                 assert titleLayout != null;
                 assert descriptionLayout != null;
@@ -807,8 +812,9 @@ public class TapTargetView extends View {
                 float left = getTextBounds().left - TEXT_SPACING;
                 float top = (getTextBounds().bottom - skipLayout.getHeight()) + TEXT_SPACING * 2;
                 float right = getTextBounds().left + skipLayout.getWidth() + TEXT_SPACING;
-                float bottom = getTextBounds().bottom + TEXT_SPACING * 2;
-                c.drawRoundRect(new RectF(left, top, right, bottom), target.descriptionBackgroundCornerRadius, target.skipBackgroundCornerRadius, skipBackgroundPaint);
+                float bottom = getTextBounds().bottom + TEXT_SPACING * 4;
+                skipBackgroundRectf.set(left, top, right, bottom);
+                c.drawRoundRect(skipBackgroundRectf, target.descriptionBackgroundCornerRadius, target.skipBackgroundCornerRadius, skipBackgroundPaint);
             }
 
             c.translate(textBounds.left, textBounds.top);
@@ -824,7 +830,7 @@ public class TapTargetView extends View {
             }
 
             if (skipLayout != null && descriptionLayout != null && titleLayout != null) {
-                c.translate(0, /*titleLayout.getHeight() + TEXT_SPACING + */descriptionLayout.getHeight() + TEXT_SPACING * 2);
+                c.translate(0, /*titleLayout.getHeight() + TEXT_SPACING + */descriptionLayout.getHeight() + TEXT_SPACING * 3);
                 skipPaint.setAlpha(skipPaint.getAlpha());
                 skipLayout.draw(c);
             }
