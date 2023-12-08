@@ -571,7 +571,7 @@ public class TapTargetView extends View {
                 boolean left = ((getTextBounds().left - TEXT_SPACING) <= lastTouchX);
                 boolean top = (((getTextBounds().bottom - skipLayout.getHeight()) + TEXT_SPACING * 2) <= lastTouchY);
                 boolean right = ((getTextBounds().left + skipLayout.getWidth() + TEXT_SPACING) > lastTouchX);
-                boolean bottom = ((getTextBounds().bottom + TEXT_SPACING * 2) > lastTouchY);
+                boolean bottom = ((getTextBounds().bottom + TEXT_SPACING * 4) > lastTouchY);
 
                 if (top && bottom && left && right) {
                     isInteractable = true;
