@@ -46,6 +46,8 @@ public class TapTarget {
     final CharSequence description;
     @Nullable
     final CharSequence skipText;
+    @Nullable
+    final CharSequence nextText;
 
     float outerCircleAlpha = 0.96f;
     float dimAlpha = 0.96f;
@@ -56,6 +58,7 @@ public class TapTarget {
     Typeface titleTypeface;
     Typeface descriptionTypeface;
     Typeface skipTypeface;
+    Typeface nextTypeface;
 
     @ColorRes
     private int outerCircleColorRes = -1;
@@ -70,10 +73,15 @@ public class TapTarget {
     @ColorRes
     private int skipTextColorRes = -1;
     @ColorRes
+    private int nextTextColorRes = -1;
+    @ColorRes
     private int descriptionBackgroundColorRes = -1;
     @ColorRes
     private int skipBackgroundColorRes = -1;
+    @ColorRes
+    private int nextBackgroundColorRes = -1;
     int skipBackgroundCornerRadius = 0;
+    int nextBackgroundCornerRadius = 0;
     int descriptionBackgroundCornerRadius = 0;
 
     private Integer outerCircleColor = null;
@@ -82,8 +90,10 @@ public class TapTarget {
     private Integer titleTextColor = null;
     private Integer descriptionTextColor = null;
     private Integer skipTextColor = null;
+    private Integer nextTextColor = null;
     private Integer descriptionBackgroundColor = null;
     private Integer skipBackgroundColor = null;
+    private Integer nextBackgroundColor = null;
 
     @DimenRes
     private int titleTextDimen = -1;
@@ -91,10 +101,13 @@ public class TapTarget {
     private int descriptionTextDimen = -1;
     @DimenRes
     private int skipTextDimen = -1;
+    @DimenRes
+    private int nextTextDimen = -1;
 
     private int titleTextSize = 20;
     private int descriptionTextSize = 18;
     private int skipTextSize = 18;
+    private int nextTextSize = 18;
     int id = -1;
 
     boolean drawShadow = false;
@@ -103,14 +116,15 @@ public class TapTarget {
     boolean transparentTarget = false;
     float descriptionTextAlpha = 0.54f;
     float skipTextAlpha = 0.80f;
+    float nextTextAlpha = 0.80f;
 
     /**
      * Return a tap target for the overflow button from the given toolbar
      * <p>
      * <b>Note:</b> This is currently experimental, use at your own risk
      */
-    public static TapTarget forToolbarOverflow(Toolbar toolbar, CharSequence title, CharSequence skipText) {
-        return forToolbarOverflow(toolbar, title, null, skipText);
+    public static TapTarget forToolbarOverflow(Toolbar toolbar, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarOverflow(toolbar, title, null, skipText, nextText);
     }
 
     /**
@@ -119,8 +133,8 @@ public class TapTarget {
      * <b>Note:</b> This is currently experimental, use at your own risk
      */
     public static TapTarget forToolbarOverflow(Toolbar toolbar, CharSequence title,
-                                               @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, false, title, description, skipText);
+                                               @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, false, title, description, skipText, nextText);
     }
 
     /**
@@ -128,8 +142,8 @@ public class TapTarget {
      * <p>
      * <b>Note:</b> This is currently experimental, use at your own risk
      */
-    public static TapTarget forToolbarOverflow(android.widget.Toolbar toolbar, CharSequence title, CharSequence skipText) {
-        return forToolbarOverflow(toolbar, title, null, skipText);
+    public static TapTarget forToolbarOverflow(android.widget.Toolbar toolbar, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarOverflow(toolbar, title, null, skipText, nextText);
     }
 
     /**
@@ -138,102 +152,102 @@ public class TapTarget {
      * <b>Note:</b> This is currently experimental, use at your own risk
      */
     public static TapTarget forToolbarOverflow(android.widget.Toolbar toolbar, CharSequence title,
-                                               @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, false, title, description, skipText);
+                                               @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, false, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the navigation button (back, up, etc) from the given toolbar
      **/
-    public static TapTarget forToolbarNavigationIcon(Toolbar toolbar, CharSequence title, CharSequence skipText) {
-        return forToolbarNavigationIcon(toolbar, title, null, skipText);
+    public static TapTarget forToolbarNavigationIcon(Toolbar toolbar, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarNavigationIcon(toolbar, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the navigation button (back, up, etc) from the given toolbar
      **/
     public static TapTarget forToolbarNavigationIcon(Toolbar toolbar, CharSequence title,
-                                                     @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, true, title, description, skipText);
+                                                     @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, true, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the navigation button (back, up, etc) from the given toolbar
      **/
-    public static TapTarget forToolbarNavigationIcon(android.widget.Toolbar toolbar, CharSequence title, CharSequence skipText) {
-        return forToolbarNavigationIcon(toolbar, title, null, skipText);
+    public static TapTarget forToolbarNavigationIcon(android.widget.Toolbar toolbar, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarNavigationIcon(toolbar, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the navigation button (back, up, etc) from the given toolbar
      **/
     public static TapTarget forToolbarNavigationIcon(android.widget.Toolbar toolbar, CharSequence title,
-                                                     @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, true, title, description, skipText);
+                                                     @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, true, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the menu item from the given toolbar
      **/
     public static TapTarget forToolbarMenuItem(Toolbar toolbar, @IdRes int menuItemId,
-                                               CharSequence title, CharSequence skipText) {
-        return forToolbarMenuItem(toolbar, menuItemId, title, null, skipText);
+                                               CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarMenuItem(toolbar, menuItemId, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the menu item from the given toolbar
      **/
     public static TapTarget forToolbarMenuItem(Toolbar toolbar, @IdRes int menuItemId,
-                                               CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, menuItemId, title, description, skipText);
+                                               CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, menuItemId, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the menu item from the given toolbar
      **/
     public static TapTarget forToolbarMenuItem(android.widget.Toolbar toolbar, @IdRes int menuItemId,
-                                               CharSequence title, CharSequence skipText) {
-        return forToolbarMenuItem(toolbar, menuItemId, title, null, skipText);
+                                               CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forToolbarMenuItem(toolbar, menuItemId, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the menu item from the given toolbar
      **/
     public static TapTarget forToolbarMenuItem(android.widget.Toolbar toolbar, @IdRes int menuItemId,
-                                               CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ToolbarTapTarget(toolbar, menuItemId, title, description, skipText);
+                                               CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ToolbarTapTarget(toolbar, menuItemId, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the specified view
      **/
-    public static TapTarget forView(View view, CharSequence title, CharSequence skipText) {
-        return forView(view, title, null, skipText);
+    public static TapTarget forView(View view, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forView(view, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the specified view
      **/
-    public static TapTarget forView(View view, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new ViewTapTarget(view, title, description, skipText);
+    public static TapTarget forView(View view, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new ViewTapTarget(view, title, description, skipText, nextText);
     }
 
     /**
      * Return a tap target for the specified bounds
      **/
-    public static TapTarget forBounds(Rect bounds, CharSequence title, CharSequence skipText) {
-        return forBounds(bounds, title, null, skipText);
+    public static TapTarget forBounds(Rect bounds, CharSequence title, CharSequence skipText, CharSequence nextText) {
+        return forBounds(bounds, title, null, skipText, nextText);
     }
 
     /**
      * Return a tap target for the specified bounds
      **/
-    public static TapTarget forBounds(Rect bounds, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        return new TapTarget(bounds, title, description, skipText);
+    public static TapTarget forBounds(Rect bounds, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        return new TapTarget(bounds, title, description, skipText, nextText);
     }
 
-    protected TapTarget(Rect bounds, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-        this(title, description, skipText);
+    protected TapTarget(Rect bounds, CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+        this(title, description, skipText, nextText);
         if (bounds == null) {
             throw new IllegalArgumentException("Cannot pass null bounds or title");
         }
@@ -241,7 +255,7 @@ public class TapTarget {
         this.bounds = bounds;
     }
 
-    protected TapTarget(CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
+    protected TapTarget(CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
         if (title == null) {
             throw new IllegalArgumentException("Cannot pass null title");
         }
@@ -249,6 +263,7 @@ public class TapTarget {
         this.title = title;
         this.description = description;
         this.skipText = skipText;
+        this.nextText = nextText;
     }
 
     /**
@@ -360,10 +375,18 @@ public class TapTarget {
     }
 
     /**
-     * Specify the color resource for the description text
+     * Specify the color resource for the skip text
      **/
     public TapTarget skipTextColor(@ColorRes int color) {
         this.skipTextColorRes = color;
+        return this;
+    }
+
+    /**
+     * Specify the color resource for the next text
+     **/
+    public TapTarget nextTextColor(@ColorRes int color) {
+        this.nextTextColorRes = color;
         return this;
     }
 
@@ -372,6 +395,14 @@ public class TapTarget {
      **/
     public TapTarget skipBackgroundColor(@ColorRes int color) {
         this.skipBackgroundColorRes = color;
+        return this;
+    }
+
+    /**
+     * Specify the background color resource for the next
+     **/
+    public TapTarget nextBackgroundColor(@ColorRes int color) {
+        this.nextBackgroundColorRes = color;
         return this;
     }
 
@@ -388,6 +419,14 @@ public class TapTarget {
      **/
     public TapTarget skipBackgroundCornerRadius(int radius) {
         this.skipBackgroundCornerRadius = radius;
+        return this;
+    }
+
+    /**
+     * Specify the background radius for the next
+     **/
+    public TapTarget nextBackgroundCornerRadius(int radius) {
+        this.nextBackgroundCornerRadius = radius;
         return this;
     }
 
@@ -418,11 +457,29 @@ public class TapTarget {
     }
 
     /**
+     * Specify the color value for the description text
+     **/
+    // TODO(Hilal): In v2, this API should be cleaned up / torched
+    public TapTarget nextTextColorInt(@ColorInt int color) {
+        this.nextTextColor = color;
+        return this;
+    }
+
+    /**
      * Specify the background color value for the skip
      **/
     // TODO(Hilal): In v2, this API should be cleaned up / torched
     public TapTarget skipBackgroundColorInt(@ColorInt int color) {
         this.skipBackgroundColor = color;
+        return this;
+    }
+
+    /**
+     * Specify the background color value for the next
+     **/
+    // TODO(Hilal): In v2, this API should be cleaned up / torched
+    public TapTarget nextBackgroundColorInt(@ColorInt int color) {
+        this.nextBackgroundColor = color;
         return this;
     }
 
@@ -472,6 +529,14 @@ public class TapTarget {
         this.skipTypeface = skipTypeface;
         return this;
     }
+   /**
+     * Specify the typeface for description text
+     **/
+    public TapTarget nextTypeface(Typeface nextTypeface) {
+        if (nextTypeface == null) throw new IllegalArgumentException("Cannot use a null typeface");
+        this.nextTypeface = nextTypeface;
+        return this;
+    }
 
     /**
      * Specify the text size for the title in SP
@@ -497,6 +562,15 @@ public class TapTarget {
     public TapTarget skipTextSize(int sp) {
         if (sp < 0) throw new IllegalArgumentException("Given negative text size");
         this.skipTextSize = sp;
+        return this;
+    }
+
+    /**
+     * Specify the text size for the description in SP
+     **/
+    public TapTarget nextTextSize(int sp) {
+        if (sp < 0) throw new IllegalArgumentException("Given negative text size");
+        this.nextTextSize = sp;
         return this;
     }
 
@@ -533,6 +607,17 @@ public class TapTarget {
     }
 
     /**
+     * Specify the alpha value [0.0, 1.0] of the description text
+     **/
+    public TapTarget nextTextAlpha(float nextTextAlpha) {
+        if (nextTextAlpha < 0 || nextTextAlpha > 1f) {
+            throw new IllegalArgumentException("Given an invalid alpha value: " + nextTextAlpha);
+        }
+        this.nextTextAlpha = nextTextAlpha;
+        return this;
+    }
+
+    /**
      * Specify the text size for the description via a dimen resource
      * <p>
      * Note: If set, this value will take precedence over the specified sp size
@@ -549,6 +634,16 @@ public class TapTarget {
      */
     public TapTarget skipTextDimen(@DimenRes int dimen) {
         this.skipTextDimen = dimen;
+        return this;
+    }
+
+    /**
+     * Specify the text size for the description via a dimen resource
+     * <p>
+     * Note: If set, this value will take precedence over the specified sp size
+     */
+    public TapTarget nextTextDimen(@DimenRes int dimen) {
+        this.nextTextDimen = dimen;
         return this;
     }
 
@@ -698,8 +793,18 @@ public class TapTarget {
     }
 
     @Nullable
+    Integer nextTextColorInt(Context context) {
+        return colorResOrInt(context, nextTextColor, nextTextColorRes);
+    }
+
+    @Nullable
     Integer skipBackgroundColorInt(Context context) {
         return colorResOrInt(context, skipBackgroundColor, skipBackgroundColorRes);
+    }
+
+    @Nullable
+    Integer nextBackgroundColorInt(Context context) {
+        return colorResOrInt(context, nextBackgroundColor, nextBackgroundColorRes);
     }
 
     @Nullable
@@ -715,6 +820,10 @@ public class TapTarget {
         return skipBackgroundCornerRadius;
     }
 
+    int nextBackgroundCornerRadius() {
+        return nextBackgroundCornerRadius;
+    }
+
     int titleTextSizePx(Context context) {
         return dimenOrSize(context, titleTextSize, titleTextDimen);
     }
@@ -725,6 +834,10 @@ public class TapTarget {
 
     int skipTextSizePx(Context context) {
         return dimenOrSize(context, skipTextSize, skipTextDimen);
+    }
+
+    int nextTextSizePx(Context context) {
+        return dimenOrSize(context, nextTextSize, nextTextDimen);
     }
 
     @Nullable

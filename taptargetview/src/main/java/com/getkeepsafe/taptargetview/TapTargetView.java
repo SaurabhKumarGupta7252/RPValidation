@@ -44,6 +44,7 @@ import android.text.SpannableStringBuilder;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -96,6 +97,8 @@ public class TapTargetView extends View {
     final Paint descriptionBackgroundPaint;
     final TextPaint skipPaint;
     final Paint skipBackgroundPaint;
+    final TextPaint nextPaint;
+    final Paint nextBackgroundPaint;
     final Paint outerCirclePaint;
     final Paint outerCircleShadowPaint;
     final Paint targetCirclePaint;
@@ -109,10 +112,15 @@ public class TapTargetView extends View {
     @Nullable
     CharSequence skipText;
     @Nullable
+    CharSequence nextText;
+    @Nullable
     StaticLayout descriptionLayout;
 
     @Nullable
     StaticLayout skipLayout;
+
+    @Nullable
+    StaticLayout nextLayout;
     boolean isDark;
     boolean debug;
     boolean shouldTintTarget;
@@ -141,9 +149,11 @@ public class TapTargetView extends View {
     int outerCircleAlpha;
     int dimAlpha;
     int skipBackgroundAlpha;
+    int nextBackgroundAlpha;
     int descriptionBackgroundAlpha;
 
     RectF skipBackgroundRectf;
+    RectF nextBackgroundRectf;
     RectF descriptionBackgroundRectf;
 
     float targetCirclePulseRadius;
@@ -222,6 +232,13 @@ public class TapTargetView extends View {
          * Signals that the user has clicked skip of the target
          **/
         public void onSkipClick(TapTargetView view) {
+            view.dismiss(true);
+        }
+
+        /**
+         * Signals that the user has clicked next
+         **/
+        public void onNextClick(TapTargetView view) {
             view.dismiss(true);
         }
 
@@ -414,6 +431,7 @@ public class TapTargetView extends View {
         this.title = target.title;
         this.description = target.description;
         this.skipText = target.skipText;
+        this.nextText = target.nextText;
 
         TARGET_PADDING = UiUtil.dp(context, 20);
         CIRCLE_PADDING = UiUtil.dp(context, 40);
@@ -447,6 +465,17 @@ public class TapTargetView extends View {
 
         skipBackgroundPaint = new Paint();
         skipBackgroundPaint.setAlpha((int) (skipBackgroundAlpha));
+
+        nextPaint = new TextPaint();
+        nextPaint.setTextSize(target.nextTextSizePx(context));
+        nextPaint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        nextPaint.setAntiAlias(true);
+        nextPaint.setAlpha((int) (0.54f * 255.0f));
+
+        nextBackgroundRectf = new RectF();
+
+        nextBackgroundPaint = new Paint();
+        nextBackgroundPaint.setAlpha((int) (nextBackgroundAlpha));
 
         descriptionBackgroundPaint = new Paint();
         descriptionBackgroundPaint.setAlpha((int) (descriptionBackgroundAlpha));
@@ -565,6 +594,7 @@ public class TapTargetView extends View {
                /* Log.e("TAG", "onClick: " + textBounds.left + " : " + textBounds.right + " : " + textBounds.top + " : " + textBounds.bottom);
                 Log.e("TAG", "onClick: " + targetBounds.left + " : " + targetBounds.right + " : " + targetBounds.top + " : " + targetBounds.bottom);
                 Log.e("TAG", "onClick: " + lastTouchX + " : " + lastTouchY + " : " + skipLayout.getHeight() + " : " + skipLayout.getWidth());
+                Log.e("TAG", "onClick: " + lastTouchX + " : " + lastTouchY + " : " + nextLayout.getHeight() + " : " + nextLayout.getWidth());
                 */
 
                 assert skipLayout != null;
@@ -573,9 +603,18 @@ public class TapTargetView extends View {
                 boolean right = ((getTextBounds().left + skipLayout.getWidth() + TEXT_SPACING) > lastTouchX);
                 boolean bottom = ((getTextBounds().bottom + TEXT_SPACING * 4) > lastTouchY);
 
+                assert nextLayout != null;
+                boolean nextLeft = ((getTextBounds().right -nextLayout.getWidth() - TEXT_SPACING) <= lastTouchX);
+                boolean nextTop = (((getTextBounds().bottom - nextLayout.getHeight()) + TEXT_SPACING * 2) <= lastTouchY);
+                boolean nextRight = ((getTextBounds().right - TEXT_SPACING) > lastTouchX);
+                boolean nextBottom = ((getTextBounds().bottom + TEXT_SPACING * 4) > lastTouchY);
+
                 if (top && bottom && left && right) {
                     isInteractable = true;
                     listener.onSkipClick(TapTargetView.this);
+                } else if (nextTop && nextBottom && nextLeft && nextRight) {
+                    isInteractable = true;
+                    listener.onNextClick(TapTargetView.this);
                 } else {
                     if (clickedInTarget) {
                         isInteractable = false;
@@ -699,6 +738,20 @@ public class TapTargetView extends View {
             skipBackgroundPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
         }
 
+        final Integer nextTextColor = target.nextTextColorInt(context);
+        if (nextTextColor != null) {
+            nextPaint.setColor(nextTextColor);
+        } else {
+            nextPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
+        }
+
+        final Integer nextBackgroundColor = target.nextBackgroundColorInt(context);
+        if (nextBackgroundColor != null) {
+            nextBackgroundPaint.setColor(nextBackgroundColor);
+        } else {
+            nextBackgroundPaint.setColor(isDark ? Color.BLACK : Color.WHITE);
+        }
+
         final Integer descriptionBackgroundColor = target.descriptionBackgroundColorInt(context);
         if (descriptionBackgroundColor != null) {
             descriptionBackgroundPaint.setColor(descriptionBackgroundColor);
@@ -796,6 +849,7 @@ public class TapTargetView extends View {
                 assert titleLayout != null;
                 assert descriptionLayout != null;
                 assert skipLayout != null;
+                assert nextLayout != null;
                 float top = getTextBounds().top + titleLayout.getHeight();
                 float bottom = getTextBounds().bottom - skipLayout.getHeight() + TEXT_SPACING;
                 float left = getTextBounds().left - TEXT_SPACING;
@@ -817,6 +871,21 @@ public class TapTargetView extends View {
                 c.drawRoundRect(skipBackgroundRectf, target.descriptionBackgroundCornerRadius, target.skipBackgroundCornerRadius, skipBackgroundPaint);
             }
 
+            assert nextText != null;
+            if (!nextText.toString().isEmpty()) {
+                assert titleLayout != null;
+                assert descriptionLayout != null;
+                assert nextLayout != null;
+
+                float right1 = getTextBounds().right + TEXT_SPACING;
+                float top1 = (getTextBounds().bottom - nextLayout.getHeight()) + TEXT_SPACING * 2;
+                float left1 = getTextBounds().right - nextLayout.getWidth() - TEXT_SPACING;
+                float bottom1 = getTextBounds().bottom + TEXT_SPACING * 4;
+
+                nextBackgroundRectf.set(left1, top1, right1, bottom1);
+                c.drawRoundRect(nextBackgroundRectf, target.descriptionBackgroundCornerRadius, target.nextBackgroundCornerRadius, nextBackgroundPaint);
+            }
+
             c.translate(textBounds.left, textBounds.top);
             titlePaint.setAlpha(textAlpha);
             if (titleLayout != null) {
@@ -833,6 +902,12 @@ public class TapTargetView extends View {
                 c.translate(0, /*titleLayout.getHeight() + TEXT_SPACING + */descriptionLayout.getHeight() + TEXT_SPACING * 3);
                 skipPaint.setAlpha(skipPaint.getAlpha());
                 skipLayout.draw(c);
+            }
+
+            if (nextLayout != null && descriptionLayout != null && titleLayout != null) {
+                c.translate(descriptionLayout.getWidth()-nextLayout.getWidth(), titleLayout.getHeight() - TEXT_SPACING * 2/* + TEXT_SPACING + descriptionLayout.getHeight() + TEXT_SPACING * 3*/);
+                nextPaint.setAlpha(nextPaint.getAlpha());
+                nextLayout.draw(c);
             }
         }
         c.restoreToCount(saveCount);
@@ -1041,6 +1116,13 @@ public class TapTargetView extends View {
                     Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
         } else {
             skipLayout = null;
+        }
+
+        if (nextText != null) {
+            nextLayout = new StaticLayout(nextText, nextPaint, (int) nextPaint.measureText(nextText.toString()),
+                    Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+        } else {
+            nextLayout = null;
         }
     }
 

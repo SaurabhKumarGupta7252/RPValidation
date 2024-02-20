@@ -195,7 +195,8 @@ class MainActivity2 : Activity() {
                 binding.progressBarMultiColor,
                 "",
                 "Desrciption",
-                "skip"
+                "skip",
+                "Got it!"
             ).cancelable(true)
                 .drawShadow(true)
                 .outerCircleColor(R.color.black)
@@ -203,15 +204,19 @@ class MainActivity2 : Activity() {
                 .dimColor(R.color.black)
                 .dimAlpha(0.2f)
                 .skipBackgroundColorInt(Color.parseColor("#00A39D"))
+                .nextBackgroundColorInt(Color.parseColor("#00A39D"))
                 .descriptionBackgroundColorInt(Color.parseColor("#00A39D"))
                 .skipBackgroundCornerRadius(25)
+                .nextBackgroundCornerRadius(25)
                 .descriptionBackgroundCornerRadius(25)
                 .targetCircleColor(R.color.white)
                 .descriptionTextColor(R.color.white)
                 .descriptionTextAlpha(1f)
                 .skipTextColor(R.color.red)
+                .nextTextColor(R.color.red)
                 .titleTextDimen(R.dimen.activity_horizontal_margin)
                 .skipTextDimen(R.dimen.activity_horizontal_margin)
+                .nextTextDimen(R.dimen.activity_horizontal_margin)
                 .tintTarget(false),
             object : TapTargetView.Listener() {
                 override fun onTargetClick(view: TapTargetView) {

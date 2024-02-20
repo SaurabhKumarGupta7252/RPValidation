@@ -33,23 +33,23 @@ import androidx.appcompat.widget.Toolbar;
 
 class ToolbarTapTarget extends ViewTapTarget {
   ToolbarTapTarget(Toolbar toolbar, @IdRes int menuItemId,
-                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-    super(toolbar.findViewById(menuItemId), title, description, skipText);
+                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+    super(toolbar.findViewById(menuItemId), title, description, skipText, nextText);
   }
 
   ToolbarTapTarget(android.widget.Toolbar toolbar, @IdRes int menuItemId,
-                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-    super(toolbar.findViewById(menuItemId), title, description, skipText);
+                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+    super(toolbar.findViewById(menuItemId), title, description, skipText, nextText);
   }
 
   ToolbarTapTarget(Toolbar toolbar, boolean findNavView,
-                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-    super(findNavView ? findNavView(toolbar) : findOverflowView(toolbar), title, description, skipText);
+                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+    super(findNavView ? findNavView(toolbar) : findOverflowView(toolbar), title, description, skipText, nextText);
   }
 
   ToolbarTapTarget(android.widget.Toolbar toolbar, boolean findNavView,
-                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText) {
-    super(findNavView ? findNavView(toolbar) : findOverflowView(toolbar), title, description, skipText);
+                   CharSequence title, @Nullable CharSequence description, @Nullable CharSequence skipText, @Nullable CharSequence nextText) {
+    super(findNavView ? findNavView(toolbar) : findOverflowView(toolbar), title, description, skipText, nextText);
   }
 
   private static ToolbarProxy proxyOf(Object instance) {
